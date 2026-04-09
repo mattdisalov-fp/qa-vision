@@ -52,7 +52,7 @@ body.light .ps svg line{stroke:var(--dim) !important;}
   .sb.open{transform:translateX(0);}
   .sb-overlay.open{display:block;}
   main{margin-left:0 !important;justify-content:flex-start;width:100%;overflow-x:hidden;min-height:auto;}
-  section{padding:60px 16px 40px !important;max-width:100% !important;width:100% !important;overflow-x:hidden;box-sizing:border-box;min-height:auto !important;}
+  section{padding:60px 16px 40px !important;max-width:100% !important;width:100% !important;overflow:visible !important;box-sizing:border-box;min-height:auto !important;}
   h1{font-size:26px !important;letter-spacing:-.3px;}
   .sub{font-size:13px;}
   .sum{font-size:13.5px;width:100%;}
@@ -143,6 +143,13 @@ body.light .ps svg line{stroke:var(--dim) !important;}
   .exp.exp-open .eb2{display:block !important;}
   .eh{padding:12px 14px;}
   .eb2{padding:0 14px 12px;font-size:12px;}
+
+  /* Collaboration handover steps */
+  .handover-steps{overflow:visible !important;}
+  .handover-steps > div{flex-wrap:nowrap !important;}
+  .handover-steps > div > div:last-child{flex:1;min-width:0;}
+  .handover-steps div[style*="max-width:600px"]{max-width:100% !important;}
+  .handover-steps div[style*="padding-bottom:24px"]{padding-bottom:16px !important;}
 
   /* Notes */
   .note, .biz{padding:14px 16px;font-size:12px;}
@@ -533,19 +540,40 @@ p{font-size:14px;margin-bottom:14px;}
   <p style="color:var(--dim);margin-top:20px;max-width:680px;">Knowledge sharing happens naturally — patterns that work on one product can inform the other, and coverage gaps are filled by whoever has context and capacity. When someone's out, the other QA can step in with enough shared understanding to keep things moving.</p>
 
   <h2>Test Handover</h2>
-  <p style="color:var(--dim);max-width:680px;margin-bottom:14px;">The innovation framework has 117 tests across three epics. Transitioning these to the core framework is important — and more involved than it might appear on the surface.</p>
+  <p style="color:var(--dim);max-width:680px;margin-bottom:20px;">The innovation framework has 117 tests across three epics. Transitioning these to the core framework is a defined process — here's how it works.</p>
 
-  <div class="exp exp-open">
-    <div class="eh" onclick="tog(event,this)"><span class="et">What the handover involves</span><span class="ea">▼</span></div>
-    <div class="eb2">The tests aren't just Python scripts that need to become JavaScript. They rely on architectural patterns — data factories that auto-cleanup after each run, session-scoped authentication that logs in once and shares cookies across tests, parametrized test data loaded from external files, per-test-type retry strategies. These patterns are what make the tests reliable and maintainable. Without them in the receiving framework, the tests would need to be significantly simplified, which makes them more brittle and harder to maintain long-term. So the work is really two things: <strong style="color:var(--text)">expanding the core framework to support these patterns</strong> (a one-time investment that improves every future test), and then <strong style="color:var(--text)">translating the test logic itself</strong>. The framework expansion is the bigger piece, and also the more valuable one.</div>
-  </div>
-  <div class="exp">
-    <div class="eh" onclick="tog(event,this)"><span class="et">How the implementation works</span><span class="ea">▼</span></div>
-    <div class="eb2">The handover package includes everything needed: test cases with IDs, steps, and expected results; plus architecture documentation explaining each pattern, why it exists, and what problem it solves. <strong style="color:var(--text)">Core QA leads the implementation</strong> — they know their framework, their codebase, and their team's workflow best. I'll be available to guide the architectural changes and help with translation, especially in the early stages. How these patterns get implemented should reflect the core team's preferences and priorities — the documentation shares what worked and why, not how it must be done. The R&D Director has expressed preference for evolving the core framework rather than simplifying the tests.</div>
-  </div>
-  <div class="exp">
-    <div class="eh" onclick="tog(event,this)"><span class="et">Timeline and ongoing support</span><span class="ea">▼</span></div>
-    <div class="eb2">Handover package delivered this sprint. After that, Core QA drives the implementation on their timeline. I'm available for guidance and review — particularly on the framework architecture side. My primary focus shifts to Studio, and I can contribute additional support when capacity allows between sprints.</div>
+  <div class="handover-steps" style="display:flex;flex-direction:column;gap:0;margin:20px 0;">
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--aBg);color:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;">1</div>
+        <div style="width:2px;flex:1;background:var(--border);min-height:24px;margin:6px 0;"></div>
+      </div>
+      <div style="padding-bottom:24px;">
+        <div style="font-size:14px;font-weight:700;color:var(--bright);margin-bottom:6px;">Deliver the handover package <span class="tag" style="background:var(--aBg);color:var(--accent2);margin-left:4px;">This sprint</span></div>
+        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;max-width:600px;">Complete package with all 117 test cases — IDs, steps, expected results, priority, and automation status. Plus architecture documentation explaining each pattern (data factories, session-scoped auth, parametrized testing, retry strategies), why it exists, and what problem it solves. Both the <em style="color:var(--text)">what to test</em> and the <em style="color:var(--text)">framework patterns needed to support it.</em></div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--cBg);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;">2</div>
+        <div style="width:2px;flex:1;background:var(--border);min-height:24px;margin:6px 0;"></div>
+      </div>
+      <div style="padding-bottom:24px;">
+        <div style="font-size:14px;font-weight:700;color:var(--bright);margin-bottom:6px;">Core team implements with architectural guidance</div>
+        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;max-width:600px;">The tests rely on patterns that don't exist in the current core framework yet — so the work is two things: <em style="color:var(--text)">expanding the framework</em> to support these patterns (a one-time investment that benefits every future test), then <em style="color:var(--text)">translating the test logic</em> from Python to JavaScript. Core QA leads both — they know their framework and codebase best. I help guide the architectural changes and assist with translation, especially in the early stages. How these patterns get implemented should reflect the core team's preferences.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--gBg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;">3</div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--bright);margin-bottom:6px;">Ongoing support as needed</div>
+        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;max-width:600px;">After the handover, Core QA drives implementation on their timeline. I'm available for guidance and review — particularly on framework architecture questions. My primary focus shifts to Studio, and I can contribute additional support when capacity allows.</div>
+      </div>
+    </div>
   </div>
 </section>
 
