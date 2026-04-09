@@ -4,11 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QA Vision — Function Point Studio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c6aff'/><text x='50' y='68' text-anchor='middle' font-family='system-ui' font-weight='900' font-size='52' fill='white'>QA</text></svg>">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#07080d;--bg2:#0d0f16;--card:#111420;--card2:#161a28;--border:#1c2033;--border2:#252a40;--text:#c8cad4;--dim:#6b7094;--bright:#eef0f6;--white:#fff;--accent:#7c6aff;--accent2:#9d8cff;--aBg:rgba(124,106,255,.1);--green:#34d399;--gBg:rgba(52,211,153,.1);--cyan:#22d3ee;--cBg:rgba(34,211,238,.08);--amber:#fbbf24;--amBg:rgba(251,191,36,.1);--red:#f87171;--rBg:rgba(248,113,113,.08);--purple:#a78bfa;--pBg:rgba(167,139,250,.1);--blue:#60a5fa;--bBg:rgba(96,165,250,.1);--sb:220px;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100vh;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100vh;transition:background .3s,color .3s;}
+body.light{--bg:#f5f6fa;--bg2:#ffffff;--card:#ffffff;--card2:#f0f1f6;--border:#e2e4ed;--border2:#d0d3e0;--text:#3a3f54;--dim:#6b7094;--bright:#1a1d2e;--white:#1a1d2e;--accent:#6550e8;--accent2:#5a45d6;--aBg:rgba(101,80,232,.08);--green:#0d9465;--gBg:rgba(13,148,101,.08);--cyan:#0891a8;--cBg:rgba(8,145,168,.06);--amber:#c48a08;--amBg:rgba(196,138,8,.08);--red:#d4453a;--rBg:rgba(212,69,58,.06);--purple:#7c5cc4;--pBg:rgba(124,92,196,.08);--blue:#3b7fdb;--bBg:rgba(59,127,219,.08);}
+body.light .sb{box-shadow:2px 0 12px rgba(0,0,0,.04);}
+body.light .card{box-shadow:0 1px 3px rgba(0,0,0,.04);}
+body.light .dc{box-shadow:0 1px 3px rgba(0,0,0,.04);}
+body.light .stat{box-shadow:0 1px 3px rgba(0,0,0,.04);}
+body.light .fn.sel{box-shadow:0 4px 16px rgba(101,80,232,.12);}
+body.light .note{background:var(--card);border-color:var(--accent);}
+body.light .biz{background:var(--card);border-color:var(--green);}
+body.light *::-webkit-scrollbar-track{background:var(--bg);}
+body.light *::-webkit-scrollbar-thumb{background:var(--border2);}
+body.light .hamburger{background:var(--card);border-color:var(--border);}
+body.light .ps svg g polygon{opacity:.85;}
+body.light [data-pl="unit"] polygon{fill:#c8d8f0 !important;stroke:#6a8fd4 !important;}
+body.light [data-pl="api"] polygon{fill:#c0e8e8 !important;stroke:#3aaeae !important;}
+body.light [data-pl="e2e"] polygon{fill:#c0e8d0 !important;stroke:#3aae6a !important;}
+body.light [data-pl="ai"] polygon{fill:#d8c8f0 !important;stroke:#7a5abf !important;}
+body.light .ps svg text{fill:var(--bright) !important;}
+body.light .ps svg text[fill*="rgba"]{fill:var(--dim) !important;}
+body.light .ps svg circle{stroke:var(--purple) !important;}
+body.light .ps svg line{stroke:var(--dim) !important;}
 .sb{position:fixed;top:0;left:0;bottom:0;width:var(--sb);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;overflow-y:auto;}
 .sb-h{padding:28px 20px 20px;border-bottom:1px solid var(--border);}
 .sb-logo{font-size:20px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);}
@@ -19,6 +40,130 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .nl.a{color:var(--accent2);background:var(--aBg);}
 .ni{width:18px;text-align:center;font-size:13px;flex-shrink:0;}
 .sb-f{padding:14px 18px;border-top:1px solid var(--border);font-size:9.5px;color:var(--dim);line-height:1.5;}
+.hamburger{display:none;position:fixed;top:12px;left:12px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:8px;width:38px;height:38px;cursor:pointer;align-items:center;justify-content:center;font-size:20px;color:var(--dim);transition:all .2s;}
+.hamburger:hover{color:var(--text);background:var(--card2);}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;}
+
+@media(max-width:768px){
+  :root{--sb:0px;}
+  body{overflow-x:hidden;overflow-y:auto;min-height:auto;}
+  .hamburger{display:flex;}
+  .sb{transform:translateX(-100%);transition:transform .3s ease;z-index:101;width:220px;}
+  .sb.open{transform:translateX(0);}
+  .sb-overlay.open{display:block;}
+  main{margin-left:0 !important;justify-content:flex-start;width:100%;overflow-x:hidden;min-height:auto;}
+  section{padding:60px 16px 40px !important;max-width:100% !important;width:100% !important;overflow-x:hidden;box-sizing:border-box;min-height:auto !important;}
+  h1{font-size:26px !important;letter-spacing:-.3px;}
+  .sub{font-size:13px;}
+  .sum{font-size:13.5px;width:100%;}
+  h2{font-size:17px;margin:28px 0 12px;}
+
+  /* Stats - stack labels */
+  .stats{grid-template-columns:repeat(2,1fr) !important;gap:8px;}
+  .stat{padding:14px 10px;}
+  .sn{font-size:22px;}
+  .sl{font-size:8.5px;letter-spacing:.5px;}
+
+  /* All card grids single column */
+  .cards, .c3, .hero-cards{grid-template-columns:1fr !important;gap:10px;}
+  .card, .dc, .eb{overflow:hidden;word-wrap:break-word;box-sizing:border-box;max-width:100%;}
+
+  /* Dashboard grids */
+  .dg{grid-template-columns:1fr !important;gap:10px;}
+
+  /* Gate rows */
+  .gr{grid-template-columns:1fr !important;gap:10px;}
+
+  /* Roadmap 2x2 */
+  .rmg{grid-template-columns:repeat(2,1fr) !important;gap:10px;}
+
+  /* Pyramid stacked */
+  .pw{flex-direction:column;}
+  .ps{flex:none;width:100%;}
+  .pi{min-height:auto;}
+
+  /* Environment compare stacked */
+  .ec{display:flex !important;flex-direction:column;gap:0;}
+  .eb{width:100% !important;}
+  .evs{padding:10px 0;text-align:center;}
+
+  /* Collaboration */
+  .cv{grid-template-columns:1fr !important;}
+  .cs-items{flex-direction:column;gap:6px;}
+  .cs-items span{text-align:center;}
+
+  /* SDLC Flow - vertical stack instead of horizontal scroll */
+  .fw{margin:20px 0;overflow:visible;padding-top:0;}
+  .fl{display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:6px !important;min-width:0 !important;}
+  .fn{min-width:0 !important;padding:10px 6px;font-size:10px;}
+  .fa{display:none !important;}
+  .fd{padding:14px;}
+  .fd div[style*="grid-template-columns"]{display:grid !important;grid-template-columns:1fr !important;gap:14px !important;}
+
+  /* Framework tooling grid */
+  .dc div[style*="grid-template-columns:1fr 1fr"]{display:grid !important;grid-template-columns:1fr !important;gap:6px !important;}
+
+  /* Cost cards - force inner flex to wrap */
+  .card div[style*="display:flex"][style*="gap:10px"]{flex-direction:column !important;}
+
+  /* Coverage chart */
+  .dc div[style*="height:130px"]{height:100px !important;}
+  .dc div[style*="font-size:8px"]{font-size:7px !important;}
+
+  /* Donut wraps */
+  .dw{flex-wrap:wrap;}
+
+  /* Allure stats */
+  .as{grid-template-columns:repeat(3,1fr) !important;gap:6px;}
+  .asn{font-size:18px;}
+  .asl{font-size:8px;}
+
+  /* Allure tabs */
+  .at{flex-wrap:wrap;gap:4px;}
+  .atb{font-size:10px;padding:6px 10px;}
+
+  /* Suite rows */
+  .sr{flex-wrap:wrap;gap:4px;padding:10px 12px;}
+  .srn{flex:1 1 100%;font-size:11px;}
+  .srb{flex:1 1 100%;margin:4px 0;}
+  .src{flex:0 0 auto;}
+
+  /* Test rows */
+  .tr{flex-wrap:wrap;gap:2px;padding:8px 12px;}
+  .trn{flex:1 1 100%;font-size:11px;}
+  .tre{display:none;}
+  .trd{flex:0 0 auto;}
+
+  /* Traceability flow wrap */
+  .dc div[style*="flex"][style*="align-items:center"][style*="flex-wrap:wrap"]{gap:6px !important;}
+
+  /* Expandables - explicit mobile fix */
+  .exp{overflow:visible !important;max-width:100%;}
+  .exp .eb2{display:none !important;}
+  .exp.exp-open .eb2{display:block !important;}
+  .eh{padding:12px 14px;}
+  .eb2{padding:0 14px 12px;font-size:12px;}
+
+  /* Notes */
+  .note, .biz{padding:14px 16px;font-size:12px;}
+
+  /* Allure environment card */
+  .dc div[style*="line-height:2.2"]{font-size:11px !important;}
+  .dc div[style*="justify-content:space-between"] span{font-size:11px;}
+}
+
+@media(max-width:480px){
+  section{padding:56px 12px 32px !important;}
+  h1{font-size:22px !important;}
+  .rmg{grid-template-columns:1fr !important;}
+  .fl{grid-template-columns:repeat(2,1fr) !important;}
+  .as{grid-template-columns:repeat(2,1fr) !important;}
+  .as .asb:last-child{grid-column:span 2;}
+  .stats{gap:6px;}
+  .sn{font-size:20px;}
+  .stat{padding:12px 8px;}
+  .sl{font-size:8px;}
+}
 main{margin-left:var(--sb);flex:1;display:flex;justify-content:center;overflow-x:hidden;}
 section{display:none;padding:48px 48px 60px;width:100%;max-width:960px;}
 section.a{display:block;}
@@ -100,9 +245,9 @@ p{font-size:14px;margin-bottom:14px;}
 .eh:hover{background:var(--card2);}
 .et{font-size:12.5px;font-weight:600;color:var(--bright);}
 .ea{color:var(--dim);transition:transform .2s;font-size:10px;}
-.exp.o .ea{transform:rotate(180deg);}
+.exp.exp-open .ea{transform:rotate(180deg);}
 .eb2{padding:0 16px 14px;display:none;font-size:12.5px;color:var(--dim);line-height:1.7;}
-.exp.o .eb2{display:block;}
+.exp.exp-open .eb2{display:block;}
 
 /* RM */
 .rmg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0;}
@@ -138,29 +283,36 @@ p{font-size:14px;margin-bottom:14px;}
 
 /* OVERVIEW HERO */
 .hero-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:32px 0;}
-.hc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all .3s;cursor:pointer;}
+.hc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all .3s;cursor:pointer;display:flex;flex-direction:column;}
 .hc:hover{border-color:var(--accent);transform:translateY(-2px);}
 .hc-icon{font-size:24px;margin-bottom:14px;}
 .hc-t{font-size:15px;font-weight:700;color:var(--bright);margin-bottom:8px;}
-.hc-d{font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:12px;}
+.hc-d{font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:12px;flex:1;}
 .hc-biz{font-size:11.5px;color:var(--green);font-weight:600;line-height:1.5;}
 </style>
 </head>
 <body>
 
-<aside class="sb">
+<button class="hamburger" id="menuBtn" onclick="toggleMenu()">☰</button>
+<div class="sb-overlay" id="sbOverlay" onclick="toggleMenu()"></div>
+
+<aside class="sb" id="sidebar">
   <div class="sb-h">
-    <div class="sb-logo">QA Vision</div>
-    <div class="sb-sub">Function Point Studio</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div class="sb-logo">QA Vision</div>
+        <div class="sb-sub">Function Point Studio</div>
+      </div>
+      <button onclick="toggleTheme()" id="themeBtn" style="background:var(--card);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;color:var(--dim);" title="Toggle light/dark theme">☀</button>
+    </div>
   </div>
   <nav class="sb-nav">
-    <a class="nl a" data-s="overview"><span class="ni">◇</span>Overview</a>
-    <a class="nl" data-s="track"><span class="ni">◆</span>Track Record</a>
+    <a class="nl a" data-s="overview"><span class="ni">◎</span>Overview</a>
+    <a class="nl" data-s="track"><span class="ni">✓</span>Track Record</a>
     <a class="nl" data-s="how"><span class="ni">⟳</span>How QA Works</a>
-    <a class="nl" data-s="studio"><span class="ni">✦</span>FP Studio Plan</a>
-    <a class="nl" data-s="collab"><span class="ni">⬡</span>Collaboration</a>
-    <a class="nl" data-s="roadmap"><span class="ni">▸</span>Roadmap</a>
-    <a class="nl" data-s="report"><span class="ni">◫</span>Sample Report</a>
+    <a class="nl" data-s="studio"><span class="ni">◈</span>FP Studio Plan</a>
+    <a class="nl" data-s="collab"><span class="ni">⇄</span>Collaboration</a>
+    <a class="nl" data-s="report"><span class="ni">▦</span>Sample Report</a>
   </nav>
   <div class="sb-f">Principles & proposals — open for team input. Details defined as product decisions are made.</div>
 </aside>
@@ -169,14 +321,14 @@ p{font-size:14px;margin-bottom:14px;}
 
 <!-- ═══ OVERVIEW ═══ -->
 <section id="overview" class="a">
-  <div class="badge" style="background:var(--aBg);color:var(--accent2);">◇ Executive Summary</div>
-  <h1>Quality at the speed of development.</h1>
+  <div class="badge" style="background:var(--aBg);color:var(--accent2);">◎ Executive Summary</div>
+  <h1>Building quality into Function Point Studio from day one.</h1>
   <div class="sub">Function Point Studio — QA Strategy</div>
   <div class="sum">Function Point Studio is a greenfield opportunity to build quality into the product from day one — not retrofit it later. This site outlines the QA approach, what's already been proven on the innovation team, and how it translates to Studio. <em>The goal: catch problems in minutes, not days, so the team ships faster with confidence.</em></div>
 
   <div class="hero-cards">
     <div class="hc" onclick="nav('track')">
-      <div class="hc-icon">◆</div>
+      <div class="hc-icon">✓</div>
       <div class="hc-t">Proven Track Record</div>
       <div class="hc-d">Built a complete QA system from scratch in 8 weeks. 117 tests across 3 epics. 100% ticket coverage. Framework, process, CI/CD — all production-ready.</div>
       <div class="hc-biz">→ The approach works. It's been built and delivered.</div>
@@ -188,7 +340,7 @@ p{font-size:14px;margin-bottom:14px;}
       <div class="hc-biz">→ No sprint delays waiting for testing. Faster time to market.</div>
     </div>
     <div class="hc" onclick="nav('studio')">
-      <div class="hc-icon">✦</div>
+      <div class="hc-icon">◈</div>
       <div class="hc-t">Built for an AI Product</div>
       <div class="hc-d">Studio needs testing that goes beyond traditional QA — prompt regression, AI output validation, graceful degradation, cost monitoring.</div>
       <div class="hc-biz">→ Customers never discover AI failures before we do.</div>
@@ -206,7 +358,7 @@ p{font-size:14px;margin-bottom:14px;}
 
 <!-- ═══ TRACK RECORD ═══ -->
 <section id="track">
-  <div class="badge" style="background:var(--aBg);color:var(--accent2);">◆ Where We Stand</div>
+  <div class="badge" style="background:var(--aBg);color:var(--accent2);">✓ Track Record</div>
   <h1>From zero to full QA coverage in 8 weeks.</h1>
   <div class="sub">Function Point Studio — QA Foundation</div>
   <div class="sum">When I joined, the innovation team had no QA system. After onboarding and training in the first two weeks, I designed and built the framework, established the process, and delivered structured QA across three sprints — while simultaneously working backwards to cover epics shipped before I was hired. <em>By end of this sprint, every ticket across all three innovation epics will have test coverage.</em></div>
@@ -297,7 +449,7 @@ p{font-size:14px;margin-bottom:14px;}
 
 <!-- ═══ FP STUDIO PLAN ═══ -->
 <section id="studio">
-  <div class="badge" style="background:var(--cBg);color:var(--cyan);">✦ Function Point Studio</div>
+  <div class="badge" style="background:var(--cBg);color:var(--cyan);">◈ Function Point Studio</div>
   <h1>QA built into the architecture from day one.</h1>
   <div class="sub">Function Point Studio</div>
   <div class="sum">The decisions we make now determine whether QA accelerates the team or chases it. <em>These are principles and capabilities I'd propose bringing to the table</em> — the specifics will take shape as the product's architecture is defined, ideally with QA having input alongside the dev team during those conversations.</div>
@@ -319,8 +471,8 @@ p{font-size:14px;margin-bottom:14px;}
 
   <h2>CI/CD Pipeline</h2>
   <div class="cards">
-    <div class="card"><div class="ct">What Runs & When</div><div class="cd"><strong style="color:var(--text)">On PR:</strong> Smoke (~5 min). Blocks merge.<br><strong style="color:var(--text)">On merge:</strong> Targeted regression (~15 min).<br><strong style="color:var(--text)">On RC:</strong> Full regression (~30 min). Gate.<br><strong style="color:var(--text)">Nightly:</strong> Full suite + coverage report.<br><strong style="color:var(--text)">Prod:</strong> Read-only smoke.</div></div>
-    <div class="card"><div class="ct">Cost</div><div class="cd" style="margin-bottom:12px;">~3,100 min/month. Free tier covers 2,000.</div><div style="display:flex;gap:10px;"><div style="flex:1;background:var(--gBg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--green);">~$15</div><div style="font-size:10px;color:var(--dim);margin-top:2px;">/mo overage</div></div><div style="flex:1;background:var(--aBg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--accent2);">~$30</div><div style="font-size:10px;color:var(--dim);margin-top:2px;">/mo self-hosted</div></div></div></div>
+    <div class="card"><div class="ct">What Runs & When</div><div class="cd"><strong style="color:var(--text)">On PR:</strong> Smoke tests (~5 min). Blocks merge on failure.<br><strong style="color:var(--text)">On merge:</strong> Targeted regression for affected modules (~15 min).<br><strong style="color:var(--text)">On RC:</strong> Full regression suite (~30 min). Release gate.<br><strong style="color:var(--text)">Nightly:</strong> Full suite + coverage report generation.<br><strong style="color:var(--text)">Production:</strong> Read-only smoke only.</div></div>
+    <div class="card"><div class="ct">Approach</div><div class="cd">GitHub Actions — already in the team's workflow, no new infrastructure to manage, native Playwright support. If usage grows beyond the free tier, self-hosted runners use the exact same workflow files with zero rewrite — a 30-minute migration, not a platform change. Costs stay minimal either way.</div></div>
   </div>
 
   <h2>Environment Strategy</h2>
@@ -342,11 +494,27 @@ p{font-size:14px;margin-bottom:14px;}
   </div>
 
   <div class="note" style="border-left-color:var(--green);margin-top:32px;">These capabilities work best when QA has input during architecture decisions — when testability, observability, and quality are considered alongside feature design from the start. I'd welcome the opportunity to be part of those conversations for Studio, and I'm looking forward to shaping the approach together with the team.</div>
+
+  <h2>Roadmap</h2>
+  <div class="rmg">
+    <div class="rm d"><div class="rmp">✓ Complete</div><div class="rmt">Foundation</div><ul class="rl"><li>QA framework (Python/Playwright)</li><li>SDLC process & gates</li><li>3 epic suites — 117 tests</li><li>CI/CD pipeline</li><li>Allure + HTML + JUnit reporting</li><li>3 structured sprints delivered</li></ul></div>
+    <div class="rm n"><div class="rmp">→ Current Sprint</div><div class="rmt">Transition</div><ul class="rl"><li>Handover & assist implementation</li><li>Jira setup (AgileTest + GH for Jira)</li><li>Product architecture input</li><li>Framework decision (Playwright/TS)</li><li>QA strategy alignment</li></ul></div>
+    <div class="rm nx"><div class="rmp">○ Next Phase</div><div class="rmt">Studio Setup</div><ul class="rl"><li>Playwright/TypeScript scaffold</li><li>CI/CD for Studio</li><li>First test suites</li><li>Coverage tracking</li><li>Reporting dashboard</li><li>AI testing layer design</li></ul></div>
+    <div class="rm f"><div class="rmp">○ Ongoing</div><div class="rmt">Scale</div><ul class="rl"><li>Tests per feature shipped</li><li>AI validation suite</li><li>Accessibility & security</li><li>Performance baselines</li><li>Production monitoring</li><li>Core coverage support</li></ul></div>
+  </div>
+
+  <h2>Guiding Principles</h2>
+  <div class="cards" style="margin-top:14px;">
+    <div class="card" style="border-left:3px solid var(--green);"><div class="ct">QA accelerates, never blocks</div><div class="cd">Every process gives faster feedback, not slower delivery. If something isn't earning its place, we change it.</div></div>
+    <div class="card" style="border-left:3px solid var(--cyan);"><div class="ct">Build in, don't bolt on</div><div class="cd">Quality decisions during architecture are 10x cheaper than after launch.</div></div>
+    <div class="card" style="border-left:3px solid var(--accent);"><div class="ct">Automate the repeatable</div><div class="cd">Automation handles regression. Human judgment handles what automation can't ask.</div></div>
+    <div class="card" style="border-left:3px solid var(--amber);"><div class="ct">Open to what works</div><div class="cd">Starting principles. The team has deep experience — the best approach is the one we arrive at together.</div></div>
+  </div>
 </section>
 
 <!-- ═══ COLLABORATION ═══ -->
 <section id="collab">
-  <div class="badge" style="background:var(--amBg);color:var(--amber);">⬡ Collaboration</div>
+  <div class="badge" style="background:var(--amBg);color:var(--amber);">⇄ Collaboration</div>
   <h1>Focused teams, shared goal.</h1>
   <div class="sub">Function Point Studio</div>
   <div class="sum">Leadership has been clear: <em>optimize everyone's time on the right things.</em> Pulling people between products means neither product gets the attention it deserves. The natural alignment is straightforward — each QA focuses where their knowledge and context runs deepest, and both products benefit from dedicated attention.</div>
@@ -367,16 +535,16 @@ p{font-size:14px;margin-bottom:14px;}
   <h2>Test Handover</h2>
   <p style="color:var(--dim);max-width:680px;margin-bottom:14px;">The innovation framework has 117 tests across three epics. Transitioning these to the core framework is important — and more involved than it might appear on the surface.</p>
 
-  <div class="exp o">
-    <div class="eh" onclick="tog(this)"><span class="et">What's involved (it's more than translation)</span><span class="ea">▼</span></div>
+  <div class="exp exp-open">
+    <div class="eh" onclick="tog(event,this)"><span class="et">What the handover involves</span><span class="ea">▼</span></div>
     <div class="eb2">The tests aren't just Python scripts that need to become JavaScript. They rely on architectural patterns — data factories that auto-cleanup after each run, session-scoped authentication that logs in once and shares cookies across tests, parametrized test data loaded from external files, per-test-type retry strategies. These patterns are what make the tests reliable and maintainable. Without them in the receiving framework, the tests would need to be significantly simplified, which makes them more brittle and harder to maintain long-term. So the work is really two things: <strong style="color:var(--text)">expanding the core framework to support these patterns</strong> (a one-time investment that improves every future test), and then <strong style="color:var(--text)">translating the test logic itself</strong>. The framework expansion is the bigger piece, and also the more valuable one.</div>
   </div>
   <div class="exp">
-    <div class="eh" onclick="tog(this)"><span class="et">How it works</span><span class="ea">▼</span></div>
+    <div class="eh" onclick="tog(event,this)"><span class="et">How the implementation works</span><span class="ea">▼</span></div>
     <div class="eb2">The handover package includes everything needed: test cases with IDs, steps, and expected results; plus architecture documentation explaining each pattern, why it exists, and what problem it solves. <strong style="color:var(--text)">Core QA leads the implementation</strong> — they know their framework, their codebase, and their team's workflow best. I'll be available to guide the architectural changes and help with translation, especially in the early stages. How these patterns get implemented should reflect the core team's preferences and priorities — the documentation shares what worked and why, not how it must be done. The R&D Director has expressed preference for evolving the core framework rather than simplifying the tests.</div>
   </div>
   <div class="exp">
-    <div class="eh" onclick="tog(this)"><span class="et">Timeline and focus</span><span class="ea">▼</span></div>
+    <div class="eh" onclick="tog(event,this)"><span class="et">Timeline and ongoing support</span><span class="ea">▼</span></div>
     <div class="eb2">Handover package delivered this sprint. After that, Core QA drives the implementation on their timeline. I'm available for guidance and review — particularly on the framework architecture side. My primary focus shifts to Studio, and I can contribute additional support when capacity allows between sprints.</div>
   </div>
 </section>
@@ -404,7 +572,7 @@ p{font-size:14px;margin-bottom:14px;}
 
 <!-- ═══ SAMPLE REPORT ═══ -->
 <section id="report">
-  <div class="badge" style="background:var(--gBg);color:var(--green);">◫ Sample Report</div>
+  <div class="badge" style="background:var(--gBg);color:var(--green);">▦ Sample Report</div>
   <h1>What QA reporting looks like.</h1>
   <div class="sub">Innovation Team Epics — Real Test Data</div>
   <div class="sum">This is the kind of reporting the framework generates — <em>this level of visibility has never existed before.</em> After every test run, leadership and the team can see exactly what passed, what failed, why, and how quality is trending over time.</div>
@@ -457,7 +625,23 @@ p{font-size:14px;margin-bottom:14px;}
 
 </main>
 <script>
-function nav(id){document.querySelectorAll('.nl').forEach(n=>n.classList.remove('a'));document.querySelector(`[data-s="${id}"]`).classList.add('a');document.querySelectorAll('section').forEach(s=>s.classList.remove('a'));document.getElementById(id).classList.add('a');window.scrollTo(0,0);}
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const btn=document.getElementById('themeBtn');
+  const isLight=document.body.classList.contains('light');
+  btn.textContent=isLight?'☾':'☀';
+  try{localStorage.setItem('qa-vision-theme',isLight?'light':'dark');}catch(e){}
+}
+try{if(localStorage.getItem('qa-vision-theme')==='light'){document.body.classList.add('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';});}}catch(e){}
+
+function toggleMenu(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sbOverlay').classList.toggle('open');
+  const btn=document.getElementById('menuBtn');
+  btn.textContent=document.getElementById('sidebar').classList.contains('open')?'✕':'☰';
+}
+
+function nav(id){document.querySelectorAll('.nl').forEach(n=>n.classList.remove('a'));document.querySelector(`[data-s="${id}"]`).classList.add('a');document.querySelectorAll('section').forEach(s=>s.classList.remove('a'));document.getElementById(id).classList.add('a');window.scrollTo(0,0);if(window.innerWidth<=768)toggleMenu();}
 document.querySelectorAll('.nl').forEach(l=>{l.addEventListener('click',()=>nav(l.dataset.s));});
 
 const stD={grooming:{d:['Break down project, create tickets','Define acceptance criteria','Estimate effort'],q:['Review tickets for testability','Flag edge cases, boundaries','Identify impact on existing behavior','Estimate QA effort, flag risks'],a:['N/A at this stage']},dev:{d:['Build on feature branch','Peer code review','Merge to epic branch','Deploy to QA env'],q:['Validate AC as code lands','Test edge cases, negative paths','Log defects with repro steps','Write automated tests in parallel'],a:['Unit tests on PR','Lint + build checks']},signoff:{d:['Retest fixes','Resolve open defects'],q:['Full E2E workflow validation','Cross-ticket interaction testing','Run smoke suite','Go / No-go decision'],a:['Smoke suite auto-runs','Coverage report generated']},rc:{d:['Create GitHub release','Attach rollback plan','Configure system'],q:['Smoke on staging','Targeted regression','Release readiness confirmation'],a:['Full regression in CI','Allure report deployed']},prod:{d:['DevOps deploys','Dev verifies live'],q:['Post-deploy smoke (read-only)','Monitor early behavior','Validate hotfixes','Flag issues with severity'],a:['Prod smoke (read-only)','Monitoring alerts']},maint:{d:['Fix client issues','Push hotfixes'],q:['Verify & reproduce issues','Create Jira ticket','Validate fix in QA + prod','Add regression test'],a:['Regression catches regressions','Error alerts']}};
@@ -465,12 +649,16 @@ const fd=document.getElementById('fd');
 function rF(s){const d=stD[s];fd.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;"><div class="c-d"><div class="fdt">Development</div><ul>${d.d.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="c-q"><div class="fdt">QA (Parallel)</div><ul>${d.q.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="c-a"><div class="fdt">Automated</div><ul>${d.a.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;}
 document.querySelectorAll('.fn').forEach(n=>{n.addEventListener('click',()=>{document.querySelectorAll('.fn').forEach(x=>x.classList.remove('sel'));n.classList.add('sel');rF(n.dataset.st);});});rF('grooming');
 
-const pD={unit:{t:'Unit Tests',o:'Development Team',d:'Fast, isolated tests for individual functions. Highest volume, cheapest to run, fastest feedback. Developers write and maintain these.',tags:[{t:'Fastest feedback',c:'background:var(--bBg);color:var(--blue)'},{t:'Dev owned',c:'background:var(--cBg);color:var(--cyan)'},{t:'Highest volume',c:'background:var(--aBg);color:var(--accent2)'}],r:'Every bug requires a full app test cycle — orders of magnitude slower and more expensive.'},api:{t:'API / Integration Tests',o:'QA + Dev (shared)',d:'Verify modules communicate correctly. API validation, data flow, auth at the API layer. Catches problems where pieces meet.',tags:[{t:'Contract validation',c:'background:var(--cBg);color:var(--cyan)'},{t:'Shared ownership',c:'background:var(--amBg);color:var(--amber)'},{t:'Data integrity',c:'background:var(--aBg);color:var(--accent2)'}],r:'UI looks perfect while backend silently returns wrong data. These catch invisible bugs.'},e2e:{t:'End-to-End / UI Tests',o:'QA',d:'Simulate real user workflows. Login → navigate → act → verify. Targeted at critical paths.',tags:[{t:'User workflows',c:'background:var(--gBg);color:var(--green)'},{t:'QA owned',c:'background:var(--aBg);color:var(--accent2)'},{t:'Critical paths',c:'background:var(--amBg);color:var(--amber)'}],r:'No automated verification features work from user perspective. Every release is a manual bet.'},ai:{t:'AI & Specialty Testing',o:'QA + Dev collaboration',d:'Prompt regression catches quality drops. Output validation checks hallucinations. Degradation testing verifies graceful AI failure handling. Cost monitoring flags API spikes.',tags:[{t:'Prompt regression',c:'background:var(--pBg);color:var(--purple)'},{t:'Hallucination checks',c:'background:var(--amBg);color:var(--amber)'},{t:'Degradation',c:'background:var(--cBg);color:var(--cyan)'},{t:'Cost monitoring',c:'background:var(--gBg);color:var(--green)'}],r:"Can't know if AI returns garbage, costs 10x what it should, or fails silently. Users discover it first."}};
+const pD={unit:{t:'Unit Tests',o:'Development Team',d:'The fastest, cheapest safety net. Each test checks one small piece of code in isolation — does this function return the right number? Does this component render? Developers write hundreds of these and they run in seconds. When something breaks, you know exactly where.',tags:[{t:'Fastest feedback',c:'background:var(--bBg);color:var(--blue)'},{t:'Dev owned',c:'background:var(--cBg);color:var(--cyan)'},{t:'Highest volume',c:'background:var(--aBg);color:var(--accent2)'}],r:'Every bug requires spinning up the full application to find — what could take seconds now takes hours.'},api:{t:'API / Integration Tests',o:'QA + Dev (shared)',d:'The frontend says "give me this data" and the backend responds. These tests verify that conversation works correctly — the right data comes back, authentication is enforced, and errors are handled properly. They catch the bugs users experience as "something is wrong but I can\'t tell what."',tags:[{t:'Contract validation',c:'background:var(--cBg);color:var(--cyan)'},{t:'Shared ownership',c:'background:var(--amBg);color:var(--amber)'},{t:'Data integrity',c:'background:var(--aBg);color:var(--accent2)'}],r:'The interface looks perfect while the system silently returns wrong data. Nobody notices until a customer does.'},e2e:{t:'End-to-End / UI Tests',o:'QA',d:'A robot clicks through the app the way a real user would. Log in, navigate to a page, fill out a form, submit it, verify the result. These tests answer the question: does this feature actually work when a human uses it?',tags:[{t:'User workflows',c:'background:var(--gBg);color:var(--green)'},{t:'QA owned',c:'background:var(--aBg);color:var(--accent2)'},{t:'Critical paths',c:'background:var(--amBg);color:var(--amber)'}],r:'There\'s no automated way to know if features work from a user\'s perspective. Every release is a manual bet that nothing is broken.'},ai:{t:'AI & Specialty Testing',o:'QA + Dev collaboration',d:'When someone changes a prompt, does the AI still give good answers? When the AI service goes down, does the product handle it gracefully or crash? Is the AI suddenly costing 10x more in API calls than last week? This layer answers the questions that are unique to AI products — the ones traditional testing doesn\'t even know to ask.',tags:[{t:'Prompt regression',c:'background:var(--pBg);color:var(--purple)'},{t:'Hallucination checks',c:'background:var(--amBg);color:var(--amber)'},{t:'Degradation',c:'background:var(--cBg);color:var(--cyan)'},{t:'Cost monitoring',c:'background:var(--gBg);color:var(--green)'}],r:"Users discover the AI is returning garbage, costing a fortune, or failing silently — before the team does."}};
 const pi=document.getElementById('pi');
 function rP(l){const d=pD[l];pi.innerHTML=`<div class="pit">${d.t}</div><div class="pio">Owned by: ${d.o}</div><div class="pid">${d.d}</div><div class="pit2" style="margin-bottom:14px;">${d.tags.map(t=>`<span style="${t.c}">${t.t}</span>`).join('')}</div><div class="pir"><strong>If you skip this layer: </strong>${d.r}</div>`;}
 document.querySelectorAll('[data-pl]').forEach(g=>{g.addEventListener('click',()=>{document.querySelectorAll('[data-pl]').forEach(x=>x.classList.remove('sel'));g.classList.add('sel');rP(g.dataset.pl);});});rP('ai');
 
-function tog(h){h.parentElement.classList.toggle('o');}
+function tog(e,el){
+  e.preventDefault();
+  e.stopPropagation();
+  el.parentElement.classList.toggle('exp-open');
+}
 
 const ms=['Auth','Dashboard','Projects','AI Engine','Billing','Reports','Settings'],cv=[92,78,65,45,30,15,0],cc=['var(--green)','var(--green)','var(--cyan)','var(--amber)','var(--amber)','var(--red)','var(--dim)'];
 const ch=document.getElementById('covChart');
