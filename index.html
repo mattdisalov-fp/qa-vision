@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
 <title>QA Vision — Function Point Studio</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c6aff'/><text x='50' y='68' text-anchor='middle' font-family='system-ui' font-weight='900' font-size='52' fill='white'>QA</text></svg>">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#07080d;--bg2:#0d0f16;--card:#111420;--card2:#161a28;--border:#1c2033;--border2:#252a40;--text:#c8cad4;--dim:#6b7094;--bright:#eef0f6;--white:#fff;--accent:#7c6aff;--accent2:#9d8cff;--aBg:rgba(124,106,255,.1);--green:#34d399;--gBg:rgba(52,211,153,.1);--cyan:#22d3ee;--cBg:rgba(34,211,238,.08);--amber:#fbbf24;--amBg:rgba(251,191,36,.1);--red:#f87171;--rBg:rgba(248,113,113,.08);--purple:#a78bfa;--pBg:rgba(167,139,250,.1);--blue:#60a5fa;--bBg:rgba(96,165,250,.1);--sb:220px;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100vh;transition:background .3s,color .3s;}
-body.light{--bg:#f5f6fa;--bg2:#ffffff;--card:#ffffff;--card2:#f0f1f6;--border:#e2e4ed;--border2:#d0d3e0;--text:#3a3f54;--dim:#6b7094;--bright:#1a1d2e;--white:#1a1d2e;--accent:#6550e8;--accent2:#5a45d6;--aBg:rgba(101,80,232,.08);--green:#0d9465;--gBg:rgba(13,148,101,.08);--cyan:#0891a8;--cBg:rgba(8,145,168,.06);--amber:#c48a08;--amBg:rgba(196,138,8,.08);--red:#d4453a;--rBg:rgba(212,69,58,.06);--purple:#7c5cc4;--pBg:rgba(124,92,196,.08);--blue:#3b7fdb;--bBg:rgba(59,127,219,.08);}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100vh;transition:background .3s,color .3s;color-scheme:dark;}
+body.light{color-scheme:light;--bg:#f5f6fa;--bg2:#ffffff;--card:#ffffff;--card2:#f0f1f6;--border:#e2e4ed;--border2:#d0d3e0;--text:#3a3f54;--dim:#6b7094;--bright:#1a1d2e;--white:#1a1d2e;--accent:#6550e8;--accent2:#5a45d6;--aBg:rgba(101,80,232,.08);--green:#0d9465;--gBg:rgba(13,148,101,.08);--cyan:#0891a8;--cBg:rgba(8,145,168,.06);--amber:#c48a08;--amBg:rgba(196,138,8,.08);--red:#d4453a;--rBg:rgba(212,69,58,.06);--purple:#7c5cc4;--pBg:rgba(124,92,196,.08);--blue:#3b7fdb;--bBg:rgba(59,127,219,.08);}
 body.light .sb{box-shadow:2px 0 12px rgba(0,0,0,.04);}
 body.light .card{box-shadow:0 1px 3px rgba(0,0,0,.04);}
 body.light .dc{box-shadow:0 1px 3px rgba(0,0,0,.04);}
@@ -20,7 +22,6 @@ body.light .note{background:var(--card);border-color:var(--accent);}
 body.light .biz{background:var(--card);border-color:var(--green);}
 body.light *::-webkit-scrollbar-track{background:var(--bg);}
 body.light *::-webkit-scrollbar-thumb{background:var(--border2);}
-body.light .hamburger{background:var(--card);border-color:var(--border);}
 body.light .ps svg g polygon{opacity:.85;}
 body.light [data-pl="unit"] polygon{fill:#c8d8f0 !important;stroke:#6a8fd4 !important;}
 body.light [data-pl="api"] polygon{fill:#c0e8e8 !important;stroke:#3aaeae !important;}
@@ -40,19 +41,22 @@ body.light .ps svg line{stroke:var(--dim) !important;}
 .nl.a{color:var(--accent2);background:var(--aBg);}
 .ni{width:18px;text-align:center;font-size:13px;flex-shrink:0;}
 .sb-f{padding:14px 18px;border-top:1px solid var(--border);font-size:9.5px;color:var(--dim);line-height:1.5;}
-.hamburger{display:none;position:fixed;top:12px;left:12px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:8px;width:38px;height:38px;cursor:pointer;align-items:center;justify-content:center;font-size:20px;color:var(--dim);transition:all .2s;}
-.hamburger:hover{color:var(--text);background:var(--card2);}
+.hamburger{display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(7,8,13,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:48px;align-items:center;padding:0 14px;cursor:default;transition:background .3s;}
+body.light .hamburger{background:rgba(245,246,250,.8);}
+.ham-btn{background:none;border:none;font-size:20px;color:var(--dim);cursor:pointer;padding:4px 8px;transition:color .2s;}
+.ham-btn:hover{color:var(--text);}
+.ham-title{font-size:12px;font-weight:700;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-left:10px;}
 .sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;}
 
 @media(max-width:768px){
   :root{--sb:0px;}
   body{overflow-x:hidden;overflow-y:auto;min-height:auto;}
   .hamburger{display:flex;}
-  .sb{transform:translateX(-100%);transition:transform .3s ease;z-index:101;width:220px;}
+  .sb{transform:translateX(-100%);transition:transform .3s ease;z-index:101;width:220px;padding-top:48px;}
   .sb.open{transform:translateX(0);}
   .sb-overlay.open{display:block;}
   main{margin-left:0 !important;justify-content:flex-start;width:100%;overflow-x:hidden;min-height:auto;}
-  section{padding:60px 16px 40px !important;max-width:100% !important;width:100% !important;overflow:visible !important;box-sizing:border-box;min-height:auto !important;}
+  section{padding:64px 16px 40px !important;max-width:100% !important;width:100% !important;overflow:visible !important;box-sizing:border-box;min-height:auto !important;}
   h1{font-size:26px !important;letter-spacing:-.3px;}
   .sub{font-size:13px;}
   .sum{font-size:13.5px;width:100%;}
@@ -300,7 +304,10 @@ p{font-size:14px;margin-bottom:14px;}
 </head>
 <body>
 
-<button class="hamburger" id="menuBtn" onclick="toggleMenu()">☰</button>
+<div class="hamburger" id="menuBar">
+  <button class="ham-btn" id="menuBtn" onclick="toggleMenu()">☰</button>
+  <span class="ham-title">QA Vision</span>
+</div>
 <div class="sb-overlay" id="sbOverlay" onclick="toggleMenu()"></div>
 
 <aside class="sb" id="sidebar">
@@ -658,9 +665,10 @@ function toggleTheme(){
   const btn=document.getElementById('themeBtn');
   const isLight=document.body.classList.contains('light');
   btn.textContent=isLight?'☾':'☀';
+  document.querySelector('meta[name="color-scheme"]').content=isLight?'light':'dark';
   try{localStorage.setItem('qa-vision-theme',isLight?'light':'dark');}catch(e){}
 }
-try{if(localStorage.getItem('qa-vision-theme')==='light'){document.body.classList.add('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';});}}catch(e){}
+try{if(localStorage.getItem('qa-vision-theme')==='light'){document.body.classList.add('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';document.querySelector('meta[name="color-scheme"]').content='light';});}}catch(e){}
 
 function toggleMenu(){
   document.getElementById('sidebar').classList.toggle('open');
