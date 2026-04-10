@@ -142,9 +142,9 @@ body.light .hamburger{background:rgba(245,246,250,.8);}
 
   /* Suite rows */
   .sr{flex-wrap:wrap;gap:4px;padding:10px 12px;}
-  .srn{flex:1 1 100%;font-size:11px;}
-  .srb{flex:1 1 100%;margin:4px 0;}
-  .src{flex:0 0 auto;}
+  .srn{flex:1 1 100%;font-size:11px;margin-bottom:2px;}
+  .srb{flex:1 1 80%;margin:0;order:2;}
+  .src{flex:0 0 auto;order:3;margin-left:8px;}
 
   /* Test rows */
   .tr{flex-wrap:nowrap;gap:2px;padding:8px 12px;}
@@ -203,7 +203,7 @@ section.a{display:block;}
 .badge{display:inline-flex;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
 h1{font-size:42px;font-weight:900;color:var(--white);line-height:1.15;margin-bottom:8px;letter-spacing:-.5px;}
 .sub{font-size:16px;font-weight:600;color:var(--accent2);margin-bottom:16px;letter-spacing:.5px;}
-.sum{font-size:15.5px;color:var(--dim);max-width:680px;line-height:1.75;margin-bottom:40px;}
+.sum{font-size:15.5px;color:var(--dim);line-height:1.75;margin-bottom:40px;}
 .sum em{color:var(--text);font-style:normal;font-weight:500;}
 h2{font-size:19px;font-weight:700;color:var(--bright);margin:40px 0 14px;}
 p{font-size:14px;margin-bottom:14px;}
@@ -357,7 +357,7 @@ p{font-size:14px;margin-bottom:14px;}
 
 <!-- ═══ OVERVIEW ═══ -->
 <section id="overview" class="a">
-  <div class="badge" style="background:var(--aBg);color:var(--accent2);">◎ Executive Summary</div>
+  <div class="badge" style="background:var(--aBg);color:var(--accent2);">◎ Overview</div>
   <h1>Building quality into Function Point Studio from day one.</h1>
   <div class="sub">Function Point Studio — QA Strategy</div>
   <div class="sum">Function Point Studio is a greenfield opportunity to build quality into the product from day one — not retrofit it later. This site outlines the QA approach, what's already been proven on the innovation team, and how it translates to Studio. <em>The goal: catch problems in minutes, not days, so the team ships faster with confidence.</em></div>
@@ -366,7 +366,7 @@ p{font-size:14px;margin-bottom:14px;}
     <div class="hc" onclick="nav('track')">
       <div class="hc-icon">✓</div>
       <div class="hc-t">Proven Track Record</div>
-      <div class="hc-d">Built a complete QA system from scratch in 8 weeks. 148 tests across 3 epics. 100% ticket coverage. Framework, process, CI/CD — all production-ready.</div>
+      <div class="hc-d">Built a complete QA system from scratch in 8 weeks using AI-accelerated development. 148 tests across 3 epics. 100% ticket coverage. Framework, process, CI/CD — all production-ready.</div>
       <div class="hc-biz">→ The approach works. It's been built and delivered.</div>
     </div>
     <div class="hc" onclick="nav('how')">
@@ -430,7 +430,7 @@ p{font-size:14px;margin-bottom:14px;}
 
   <h2>What's Built <a href="https://github.com/Function-Point/fpei-qa-framework" target="_blank" style="font-size:12px;font-weight:500;color:var(--accent2);text-decoration:none;margin-left:10px;padding:4px 10px;background:var(--aBg);border-radius:6px;">View on GitHub →</a></h2>
   <div class="cards">
-    <div class="card"><div class="ci" style="background:var(--aBg);color:var(--accent);">⚙</div><div class="ct">QA Framework</div><div class="cd">Playwright + Python + pytest. POM, API modules, data factory with auto-cleanup, parametrized testing, soft assertions, retry strategies, production safety guards.</div></div>
+    <div class="card"><div class="ci" style="background:var(--aBg);color:var(--accent);">⚙</div><div class="ct">QA Framework</div><div class="cd">Playwright + Python + pytest. POM, API modules, data factory with auto-cleanup, parametrized testing, soft assertions, retry strategies, production safety guards. AI-assisted development throughout — test generation, data modeling, exploratory analysis, and documentation.</div></div>
     <div class="card"><div class="ci" style="background:var(--gBg);color:var(--green);">✓</div><div class="ct">SDLC-Aligned Process</div><div class="cd">QA gates from grooming to production. Entry/exit criteria, core impact checklist, testing layers with clear ownership.</div></div>
     <div class="card"><div class="ci" style="background:var(--cBg);color:var(--cyan);">⟳</div><div class="ct">CI/CD Pipeline</div><div class="cd">GitHub Actions — smoke on PR, targeted tests per ticket, full regression on RC. Allure reports with trend history.</div></div>
     <div class="card"><div class="ci" style="background:var(--amBg);color:var(--amber);">◈</div><div class="ct">Reporting & Traceability</div><div class="cd">Allure dashboards, HTML reports, JUnit XML. Migrating to AgileTest + GitHub for Jira for full traceability.</div></div>
@@ -485,14 +485,14 @@ p{font-size:14px;margin-bottom:14px;}
 
 <!-- ═══ FP STUDIO PLAN ═══ -->
 <section id="studio">
-  <div class="badge" style="background:var(--cBg);color:var(--cyan);">◈ Function Point Studio</div>
+  <div class="badge" style="background:var(--cBg);color:var(--cyan);">◈ Function Point Studio Plan</div>
   <h1>QA built into the architecture from day one.</h1>
   <div class="sub">Function Point Studio</div>
   <div class="sum">The decisions we make now determine whether QA accelerates the team or chases it. <em>These are principles and capabilities I'd propose bringing to the table</em> — the specifics will take shape as the product's architecture is defined, ideally with QA having input alongside the dev team during those conversations.</div>
 
   <h2>Proposed Framework: Playwright + TypeScript</h2>
-  <p style="color:var(--dim);max-width:680px;margin-bottom:14px;">Match the test framework to the product's language. The whole team can read, review, and contribute to tests. The innovation framework proves the full tooling stack works — these same patterns translate natively to TypeScript.</p>
-  <div class="dc" style="margin:16px 0;"><div class="dct">Framework Tooling (Proven)</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;"><div style="font-size:12px;color:var(--dim);line-height:2;"><div><span class="tag" style="background:var(--aBg);color:var(--accent2)">Playwright</span> Browser automation</div><div><span class="tag" style="background:var(--cBg);color:var(--cyan)">API Client</span> Auth HTTP + auto-refresh</div><div><span class="tag" style="background:var(--gBg);color:var(--green)">DB Client</span> Read-only data assertions</div><div><span class="tag" style="background:var(--pBg);color:var(--purple)">Data Factory</span> Unique data + auto-cleanup</div><div><span class="tag" style="background:var(--amBg);color:var(--amber)">Faker</span> Dynamic test data</div></div><div style="font-size:12px;color:var(--dim);line-height:2;"><div><span class="tag" style="background:var(--gBg);color:var(--green)">Soft Assertions</span> Continue on fail, report all</div><div><span class="tag" style="background:var(--rBg);color:var(--red)">Retry Strategy</span> Per-type: smoke 0×, ui 1×3s</div><div><span class="tag" style="background:var(--cBg);color:var(--cyan)">Timeouts</span> Per-test enforcement</div><div><span class="tag" style="background:var(--aBg);color:var(--accent2)">Multi-Format Reports</span> Allure + HTML + JUnit</div><div><span class="tag" style="background:var(--amBg);color:var(--amber)">Safety Guards</span> Prod tests read-only</div></div></div></div>
+  <p style="color:var(--dim);margin-bottom:14px;">Match the test framework to the product's language. The whole team can read, review, and contribute to tests. The innovation framework proves the full tooling stack works — these same patterns translate natively to TypeScript.</p>
+  <div class="dc" style="margin:16px 0;"><div class="dct">Framework Tooling (Proven)</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;"><div style="font-size:12px;color:var(--dim);line-height:2;"><div><span class="tag" style="background:var(--aBg);color:var(--accent2)">Playwright</span> Browser automation</div><div><span class="tag" style="background:var(--cBg);color:var(--cyan)">API Client</span> Auth HTTP + auto-refresh</div><div><span class="tag" style="background:var(--gBg);color:var(--green)">DB Client</span> Read-only data assertions</div><div><span class="tag" style="background:var(--pBg);color:var(--purple)">Data Factory</span> Unique data + auto-cleanup</div><div><span class="tag" style="background:var(--amBg);color:var(--amber)">Faker</span> Dynamic test data</div></div><div style="font-size:12px;color:var(--dim);line-height:2;"><div><span class="tag" style="background:var(--gBg);color:var(--green)">Soft Assertions</span> Continue on fail, report all</div><div><span class="tag" style="background:var(--rBg);color:var(--red)">Retry Strategy</span> Per-type: smoke 0×, ui 1×3s</div><div><span class="tag" style="background:var(--cBg);color:var(--cyan)">Timeouts</span> Per-test enforcement</div><div><span class="tag" style="background:var(--aBg);color:var(--accent2)">Multi-Format Reports</span> Allure + HTML + JUnit</div><div><span class="tag" style="background:var(--amBg);color:var(--amber)">Safety Guards</span> Prod tests read-only</div></div></div><div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--dim);"><span class="tag" style="background:var(--pBg);color:var(--purple)">AI-Accelerated</span> Test generation, data modeling, exploratory test design, documentation, and framework development — AI tools used throughout as a force multiplier</div></div>
 
   <h2>Capabilities to Build In Early</h2>
   <p style="color:var(--dim);margin-bottom:14px;">Much cheaper at the start than retrofitted later.</p>
@@ -512,7 +512,7 @@ p{font-size:14px;margin-bottom:14px;}
   </div>
 
   <h2>Environment Strategy</h2>
-  <p style="color:var(--dim);max-width:680px;">Since we're building from scratch, we have the opportunity to engineer the QA environment alongside the product. Currently, every QA deployment requires full reconfiguration of third-party integrations — <strong style="color:var(--text)">QBO, QBD, Stripe, webhooks</strong> — taking 2+ hours per cycle and repeating on every bug fix retest. Over a sprint, that's <strong style="color:var(--red);">~2 days of lost productivity per tester</strong> spent fighting infrastructure instead of testing. For Studio, persistent environments where integrations survive across deploys would eliminate this bottleneck entirely — enabling the fast turnaround and feedback loops that an end-of-year market timeline demands.</p>
+  <p style="color:var(--dim);">Since we're building from scratch, we have the opportunity to engineer the QA environment alongside the product. Currently, every QA deployment requires full reconfiguration of third-party integrations — <strong style="color:var(--text)">QBO, QBD, Stripe, webhooks</strong> — taking 2+ hours per cycle and repeating on every bug fix retest. Over a sprint, that's <strong style="color:var(--red);">~2 days of lost productivity per tester</strong> spent fighting infrastructure instead of testing. For Studio, persistent environments where integrations survive across deploys would eliminate this bottleneck entirely — enabling the fast turnaround and feedback loops that an end-of-year market timeline demands.</p>
   <div class="ec" style="margin-top:16px;">
     <div class="eb"><div class="ebt" style="color:var(--red);">Traditional: Ephemeral</div><div class="es"><span style="color:var(--dim)">Setup per cycle</span><span style="color:var(--red);font-weight:600;">~2+ hours</span></div><div class="es"><span style="color:var(--dim)">Bug fix retest</span><span style="color:var(--red)">Full reconfig</span></div><div class="es"><span style="color:var(--dim)">Sprint impact</span><span style="color:var(--red);font-weight:700;">~2 days lost</span></div></div>
     <div class="evs">vs</div>
@@ -543,7 +543,7 @@ p{font-size:14px;margin-bottom:14px;}
   <div class="cards" style="margin-top:14px;">
     <div class="card" style="border-left:3px solid var(--green);"><div class="ct">QA accelerates, never blocks</div><div class="cd">Every process gives faster feedback, not slower delivery. If something isn't earning its place, we change it.</div></div>
     <div class="card" style="border-left:3px solid var(--cyan);"><div class="ct">Build in, don't bolt on</div><div class="cd">Quality decisions during architecture are 10x cheaper than after launch.</div></div>
-    <div class="card" style="border-left:3px solid var(--accent);"><div class="ct">Automate the repeatable</div><div class="cd">Automation handles regression. Human judgment handles what automation can't ask.</div></div>
+    <div class="card" style="border-left:3px solid var(--accent);"><div class="ct">Automate the repeatable</div><div class="cd">Automation handles regression. AI accelerates test creation and analysis. Human judgment handles what neither can ask.</div></div>
     <div class="card" style="border-left:3px solid var(--amber);"><div class="ct">Open to what works</div><div class="cd">Starting principles. The team has deep experience — the best approach is the one we arrive at together.</div></div>
   </div>
 </section>
@@ -566,10 +566,10 @@ p{font-size:14px;margin-bottom:14px;}
     </div>
   </div>
 
-  <p style="color:var(--dim);margin-top:20px;max-width:680px;">Knowledge sharing happens naturally — patterns that work on one product can inform the other, and coverage gaps are filled by whoever has context and capacity. When someone's out, the other QA can step in with enough shared understanding to keep things moving.</p>
+  <p style="color:var(--dim);margin-top:20px;">Knowledge sharing happens naturally — patterns that work on one product can inform the other, and coverage gaps are filled by whoever has context and capacity. When someone's out, the other QA can step in with enough shared understanding to keep things moving.</p>
 
   <h2>Test Handover</h2>
-  <p style="color:var(--dim);max-width:680px;margin-bottom:20px;">The innovation framework has 148 tests across three epics. Transitioning these to the core framework is a defined process — here's how it works.</p>
+  <p style="color:var(--dim);margin-bottom:20px;">The innovation framework has 148 tests across three epics. Transitioning these to the core framework is a defined process — here's how it works.</p>
 
   <div class="handover-steps" style="display:flex;flex-direction:column;gap:0;margin:20px 0;">
     <div style="display:flex;gap:16px;align-items:flex-start;">
@@ -579,7 +579,7 @@ p{font-size:14px;margin-bottom:14px;}
       </div>
       <div style="padding-bottom:24px;">
         <div style="font-size:14px;font-weight:700;color:var(--bright);margin-bottom:6px;">Deliver the handover package <span class="tag" style="background:var(--aBg);color:var(--accent2);margin-left:4px;">This sprint</span></div>
-        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;max-width:600px;">Complete package with all 148 test cases — IDs, steps, expected results, priority, and automation status. Plus architecture documentation explaining each pattern (data factories, session-scoped auth, parametrized testing, retry strategies), why it exists, and what problem it solves. Both the <em style="color:var(--text)">what to test</em> and the <em style="color:var(--text)">framework patterns needed to support it.</em></div>
+        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;;">Complete package with all 148 test cases — IDs, steps, expected results, priority, and automation status. Plus architecture documentation explaining each pattern (data factories, session-scoped auth, parametrized testing, retry strategies), why it exists, and what problem it solves. Both the <em style="color:var(--text)">what to test</em> and the <em style="color:var(--text)">framework patterns needed to support it.</em></div>
       </div>
     </div>
 
@@ -590,7 +590,7 @@ p{font-size:14px;margin-bottom:14px;}
       </div>
       <div style="padding-bottom:24px;">
         <div style="font-size:14px;font-weight:700;color:var(--bright);margin-bottom:6px;">Core team implements with architectural guidance</div>
-        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;max-width:600px;">The tests rely on patterns that don't exist in the current core framework yet — so the work is two things: <em style="color:var(--text)">expanding the framework</em> to support these patterns (a one-time investment that benefits every future test), then <em style="color:var(--text)">translating the test logic</em> from Python to JavaScript. Core QA leads both — they know their framework and codebase best. I help guide the architectural changes and assist with translation, especially in the early stages. How these patterns get implemented should reflect the core team's preferences.</div>
+        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;;">The tests rely on patterns that don't exist in the current core framework yet — so the work is two things: <em style="color:var(--text)">expanding the framework</em> to support these patterns (a one-time investment that benefits every future test), then <em style="color:var(--text)">translating the test logic</em> from Python to JavaScript. Core QA leads both — they know their framework and codebase best. I help guide the architectural changes and assist with translation, especially in the early stages. How these patterns get implemented should reflect the core team's preferences.</div>
       </div>
     </div>
 
@@ -600,7 +600,7 @@ p{font-size:14px;margin-bottom:14px;}
       </div>
       <div>
         <div style="font-size:14px;font-weight:700;color:var(--bright);margin-bottom:6px;">Ongoing support as needed</div>
-        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;max-width:600px;">After the handover, Core QA drives implementation on their timeline. I'm available for guidance and review — particularly on framework architecture questions. My primary focus shifts to Studio, and I can contribute additional support when capacity allows.</div>
+        <div style="font-size:12.5px;color:var(--dim);line-height:1.7;;">After the handover, Core QA drives implementation on their timeline. I'm available for guidance and review — particularly on framework architecture questions. My primary focus shifts to Studio, and I can contribute additional support when capacity allows.</div>
       </div>
     </div>
   </div>
