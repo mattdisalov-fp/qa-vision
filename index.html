@@ -11,7 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#07080d;--bg2:#0d0f16;--card:#111420;--card2:#161a28;--border:#1c2033;--border2:#252a40;--text:#c8cad4;--dim:#6b7094;--bright:#eef0f6;--white:#fff;--accent:#7c6aff;--accent2:#9d8cff;--aBg:rgba(124,106,255,.1);--green:#34d399;--gBg:rgba(52,211,153,.1);--cyan:#22d3ee;--cBg:rgba(34,211,238,.08);--amber:#fbbf24;--amBg:rgba(251,191,36,.1);--red:#f87171;--rBg:rgba(248,113,113,.08);--purple:#a78bfa;--pBg:rgba(167,139,250,.1);--blue:#60a5fa;--bBg:rgba(96,165,250,.1);--sb:220px;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100vh;transition:background .3s,color .3s;color-scheme:dark;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100vh;transition:background .3s,color .3s;color-scheme:light;}
 body.light{color-scheme:light;--bg:#f5f6fa;--bg2:#ffffff;--card:#ffffff;--card2:#f0f1f6;--border:#e2e4ed;--border2:#d0d3e0;--text:#3a3f54;--dim:#6b7094;--bright:#1a1d2e;--white:#1a1d2e;--accent:#6550e8;--accent2:#5a45d6;--aBg:rgba(101,80,232,.08);--green:#0d9465;--gBg:rgba(13,148,101,.08);--cyan:#0891a8;--cBg:rgba(8,145,168,.06);--amber:#c48a08;--amBg:rgba(196,138,8,.08);--red:#d4453a;--rBg:rgba(212,69,58,.06);--purple:#7c5cc4;--pBg:rgba(124,92,196,.08);--blue:#3b7fdb;--bBg:rgba(59,127,219,.08);}
 body.light .sb{box-shadow:2px 0 12px rgba(0,0,0,.04);}
 body.light .card{box-shadow:0 1px 3px rgba(0,0,0,.04);}
@@ -324,7 +324,7 @@ p{font-size:14px;margin-bottom:14px;}
 .hc-biz{font-size:11.5px;color:var(--green);font-weight:600;line-height:1.5;}
 </style>
 </head>
-<body>
+<body class="light">
 
 <div class="hamburger" id="menuBar">
   <button class="ham-btn" id="menuBtn" onclick="toggleMenu()">☰</button>
@@ -691,7 +691,7 @@ function toggleTheme(){
   document.querySelector('meta[name="color-scheme"]').content=isLight?'light':'dark';
   try{localStorage.setItem('qa-vision-theme',isLight?'light':'dark');}catch(e){}
 }
-try{if(localStorage.getItem('qa-vision-theme')==='light'){document.body.classList.add('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';document.querySelector('meta[name="color-scheme"]').content='light';});}}catch(e){}
+try{var saved=localStorage.getItem('qa-vision-theme');if(saved==='dark'){document.body.classList.remove('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☀';document.querySelector('meta[name="color-scheme"]').content='dark';});}else{document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';});}}catch(e){}
 
 function toggleMenu(){
   document.getElementById('sidebar').classList.toggle('open');
