@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
-<title>QA Vision — Function Point Studio</title>
+<title>QA Strategy — Function Point Studio</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c6aff'/><text x='50' y='68' text-anchor='middle' font-family='system-ui' font-weight='900' font-size='52' fill='white'>QA</text></svg>">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -33,7 +33,7 @@ body.light .ps svg circle{stroke:var(--purple) !important;}
 body.light .ps svg line{stroke:var(--dim) !important;}
 .sb{position:fixed;top:0;left:0;bottom:0;width:var(--sb);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;overflow-y:auto;}
 .sb-h{padding:28px 20px 20px;border-bottom:1px solid var(--border);}
-.sb-logo{font-size:20px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);}
+.sb-logo{font-size:20px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);}
 .sb-sub{font-size:10.5px;color:var(--dim);font-weight:500;margin-top:2px;}
 .sb-nav{padding:14px 10px;flex:1;}
 .nl{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .2s;margin-bottom:2px;text-decoration:none;}
@@ -328,18 +328,16 @@ p{font-size:14px;margin-bottom:14px;}
 
 <div class="hamburger" id="menuBar">
   <button class="ham-btn" id="menuBtn" onclick="toggleMenu()">☰</button>
-  <span class="ham-title">QA Vision</span>
+  <span class="ham-title">QA Strategy</span>
 </div>
 <div class="sb-overlay" id="sbOverlay" onclick="toggleMenu()"></div>
 
 <aside class="sb" id="sidebar">
   <div class="sb-h">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <div class="sb-logo">QA Vision</div>
-        <div class="sb-sub">Function Point Studio</div>
-      </div>
-      <button onclick="toggleTheme()" id="themeBtn" style="background:var(--card);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;color:var(--dim);" title="Toggle light/dark theme">☀</button>
+    <div class="sb-logo">QA Strategy</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px;">
+      <div class="sb-sub">Function Point Studio</div>
+      <button onclick="toggleTheme()" id="themeBtn" style="background:var(--card);border:1px solid var(--border);border-radius:6px;width:28px;height:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;color:var(--dim);" title="Toggle light/dark theme">☀</button>
     </div>
   </div>
   <nav class="sb-nav">
@@ -631,7 +629,7 @@ p{font-size:14px;margin-bottom:14px;}
 <section id="report">
   <div class="badge" style="background:var(--gBg);color:var(--green);">▦ Sample Report</div>
   <h1>What QA reporting looks like.</h1>
-  <div class="sub">Innovation Team Epics — Real Test Data</div>
+  <div class="sub">Innovation Team Epics — Real Test Data <a href="https://function-point.github.io/fpei-qa-framework/#" target="_blank" style="font-size:12px;font-weight:500;color:var(--accent2);text-decoration:none;margin-left:10px;padding:4px 10px;background:var(--aBg);border-radius:6px;">View Live Report →</a></div>
   <div class="sum">This is the kind of reporting the framework generates — <em>this level of visibility has never existed before.</em> After every test run, leadership and the team can see exactly what passed, what failed, why, and how quality is trending over time.</div>
 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
@@ -689,9 +687,9 @@ function toggleTheme(){
   const isLight=document.body.classList.contains('light');
   btn.textContent=isLight?'☾':'☀';
   document.querySelector('meta[name="color-scheme"]').content=isLight?'light':'dark';
-  try{localStorage.setItem('qa-vision-theme',isLight?'light':'dark');}catch(e){}
+  try{localStorage.setItem('qa-strategy-theme',isLight?'light':'dark');}catch(e){}
 }
-try{var saved=localStorage.getItem('qa-vision-theme');if(saved==='dark'){document.body.classList.remove('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☀';document.querySelector('meta[name="color-scheme"]').content='dark';});}else{document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';});}}catch(e){}
+try{var saved=localStorage.getItem('qa-strategy-theme');if(saved==='dark'){document.body.classList.remove('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☀';document.querySelector('meta[name="color-scheme"]').content='dark';});}else{document.addEventListener('DOMContentLoaded',()=>{document.getElementById('themeBtn').textContent='☾';});}}catch(e){}
 
 function toggleMenu(){
   document.getElementById('sidebar').classList.toggle('open');
